@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Tesis_PrototipoMediaFidelidad_V1.0</string>
     <string name="ingreso_aplicacion">INGRESAR</string>
+    <string name="ingreso_ceguera_visual_severa">CEGUERA - DISCAPACIDAD VISUAL SEVERA</string>
+    <string name="ingreso_fisica_moderada">DISCAPACIDAD FÍSICA MODERADA</string>
+    <string name="ingreso_adulto_mayor">ADULTO MAYOR</string>
 </resources>

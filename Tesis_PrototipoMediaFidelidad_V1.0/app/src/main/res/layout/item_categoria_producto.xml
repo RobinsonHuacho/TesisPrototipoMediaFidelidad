@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#d1d1d1"
+    android:padding="7dp">
+
+    <ImageView
+        android:id="@+id/ImageView_Categoria_Producto"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+
+    <TextView
+        android:id="@+id/TextView_Nombre_Categoria"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Categoria Producto"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textStyle="bold"
+        android:gravity="center"/>
+
+</LinearLayout>
