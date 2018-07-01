@@ -8,9 +8,12 @@ public class ElementoCategoriaProducto {
     //Componentes Categorías Productos
     private String IdCategoriaProducto;
     private String NombreCategoriaProducto;
-    private int ImagenCategoriaProducto;
+    private String ImagenCategoriaProducto;
 
-    public ElementoCategoriaProducto(String idCategoriaProducto, String nombreCategoriaProducto, int imagenCategoriaProducto) {
+    public ElementoCategoriaProducto() {
+    }
+
+    public ElementoCategoriaProducto(String idCategoriaProducto, String nombreCategoriaProducto, String imagenCategoriaProducto) {
         IdCategoriaProducto = idCategoriaProducto;
         NombreCategoriaProducto = nombreCategoriaProducto;
         ImagenCategoriaProducto = imagenCategoriaProducto;
@@ -32,11 +35,11 @@ public class ElementoCategoriaProducto {
         NombreCategoriaProducto = nombreCategoriaProducto;
     }
 
-    public int getImagenCategoriaProducto() {
+    public String getImagenCategoriaProducto() {
         return ImagenCategoriaProducto;
     }
 
-    public void setImagenCategoriaProducto(int imagenCategoriaProducto) {
+    public void setImagenCategoriaProducto(String imagenCategoriaProducto) {
         ImagenCategoriaProducto = imagenCategoriaProducto;
     }
 }

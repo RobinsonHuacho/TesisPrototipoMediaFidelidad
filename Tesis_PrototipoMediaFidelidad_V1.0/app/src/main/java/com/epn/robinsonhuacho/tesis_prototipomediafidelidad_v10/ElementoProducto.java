@@ -8,19 +8,18 @@ public class ElementoProducto {
     private String IdCategoriaProducto;
     private String Nombres;
     private String Descripcion;
-    private int Cantidad;
-    private double Precio;
-    private double Total;
-    private int Imagen;
+    private String Precio;
+    private String Imagen;
 
+    public ElementoProducto() {
+    }
 
-    public ElementoProducto(String idProducto, String idCategoriaProducto, String nombres, String descripcion, double precio, int cantidad, int imagen){
+    public ElementoProducto(String idProducto, String idCategoriaProducto, String nombres, String descripcion, String precio, String imagen){
         IdProducto = idProducto;
         IdCategoriaProducto= idCategoriaProducto;
         Nombres = nombres;
         Descripcion=descripcion;
         Precio=precio;
-        Cantidad=cantidad;
         Imagen=imagen;
     }
 
@@ -56,35 +55,19 @@ public class ElementoProducto {
         Descripcion = descripcion;
     }
 
-    public int getCantidad() {
-        return Cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        Cantidad = cantidad;
-    }
-
-    public double getPrecio() {
+    public String getPrecio() {
         return Precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(String precio) {
         Precio = precio;
     }
 
-    public double getTotal() {
-        return Math.round(Cantidad*Precio*100d)/100d;
-    }
-
-    public void setTotal(double total) {
-        Total = total;
-    }
-
-    public int getImagen() {
+    public String getImagen() {
         return Imagen;
     }
 
-    public void setImagen(int imagen) {
+    public void setImagen(String imagen) {
         Imagen = imagen;
     }
 
@@ -92,9 +75,9 @@ public class ElementoProducto {
     public String toString() {
         return "Producuto {" +
                 "ID : '" + IdProducto + '\'' +
-                ", Nombres : '" + Nombres + '\'' +
+                ", Nombre : '" + Nombres + '\'' +
                 ", Precio : '" + Precio + '\'' +
-                ", Total : '" + Total + '\'' +
+
                 '}';
     }
 }

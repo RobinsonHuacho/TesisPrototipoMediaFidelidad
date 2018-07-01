@@ -17,17 +17,13 @@ public class ListaBeneficiarioDonacion extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_lista_beneficiario_donacion);
 
-        ListView listView = (ListView) findViewById(R.id.ListView_Beneficiarios);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(),Donacion.class);
-                startActivity(intent);
-            }
-        });
+
+
+
 
     }
 }

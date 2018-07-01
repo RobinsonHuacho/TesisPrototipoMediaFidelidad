@@ -8,20 +8,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IngresoAplicacion">
+        <activity
+            android:name=".SeleccionRol"
+            android:label="Selección de Rol">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SeleccionRol"
-            android:label="Selección de Rol" />
+        <activity android:name=".IngresoAplicacion" />
         <activity android:name=".ListaCategoriaProducto" />
-        <activity android:name=".ListaProductos" />
+        <activity
+            android:name=".ListaProductos"
+            android:parentActivityName=".ListaCategoriaProducto">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListaCategoriaProducto" />
+        </activity>
         <activity android:name=".ListaBeneficiarioDonacion" />
-        <activity android:name=".Donacion"></activity>
+        <activity android:name=".Donacion" />
+        <activity android:name=".ConfirmacionCompra"></activity>
     </application>
 
 </manifest>

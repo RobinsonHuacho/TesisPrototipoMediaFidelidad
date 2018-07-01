@@ -1,63 +1,52 @@
 package com.epn.robinsonhuacho.tesis_prototipomediafidelidad_v10;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-
-import java.util.List;
+import com.github.snowdream.android.widget.SmartImageView;
 
 /**
  * Adaptador de leads
  */
-public class ElementosCategoriaProductoAdaptador extends ArrayAdapter<ElementoCategoriaProducto> {
-    public ElementosCategoriaProductoAdaptador(Context context, List<ElementoCategoriaProducto> objects) {
-        super(context, 0, objects);
+public class ElementosCategoriaProductoAdaptador extends ArrayAdapter<String> {
+
+    private final Activity context;
+    private final String[] itemname;
+    private final String []itemImagenes;
+    private final String tipoImagen;
+
+
+    public ElementosCategoriaProductoAdaptador(Activity context, String[] itemname, String tipoImagen,String []itemImagenes) {
+        super(context, R.layout.item_categoria_producto, itemname);
+        this.context=context;
+        this.itemname = itemname;
+        this.itemImagenes = itemImagenes;
+        this.tipoImagen = tipoImagen;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Obtener inflater.
-        LayoutInflater inflater = (LayoutInflater) getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater=context.getLayoutInflater();
+        View rowView=inflater.inflate(R.layout.item_categoria_producto,null,true);
+        TextView txtTitle = (TextView) rowView.findViewById(R.id.TextView_Nombre_Categoria);
+        SmartImageView imageView= (SmartImageView) rowView.findViewById(R.id.ImageView_Categoria_Producto);
+        txtTitle.setText(itemname[position]);
+        Rect rect = new Rect(imageView.getLeft(),imageView.getTop(), imageView.getRight(),imageView.getBottom());
+        imageView.setImageUrl("http://192.168.0.6:8080/ProyectoIntegrador/Images/"+tipoImagen+"/"+itemImagenes[position], rect);
 
-        ViewHolder holder;
+        return rowView;
 
-        // ¿Ya se infló este view?
-        if (null == convertView) {
-            //Si no existe, entonces inflarlo con image_list_view.xml
-            convertView = inflater.inflate(
-                    R.layout.item_categoria_producto,
-                    parent,
-                    false);
-
-            holder = new ViewHolder();
-            holder.imagen = (ImageView) convertView.findViewById(R.id.ImageView_Categoria_Producto);
-            holder.nombres = (TextView) convertView.findViewById(R.id.TextView_Nombre_Categoria);
-
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-
-        // ElementoCategoriaProducto actual
-        ElementoCategoriaProducto elementoCategoriaProducto = getItem(position);
-
-        // Setup
-        holder.nombres.setText(elementoCategoriaProducto.getNombreCategoriaProducto());
-        Glide.with(getContext()).load(elementoCategoriaProducto.getImagenCategoriaProducto()).into(holder.imagen);
-
-        return convertView;
     }
 
-    static class ViewHolder {
-        ImageView imagen;
-        TextView nombres;
-        
-    }
+
 }
