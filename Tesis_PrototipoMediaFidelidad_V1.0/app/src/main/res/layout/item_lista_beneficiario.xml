@@ -9,7 +9,7 @@
     android:background="?attr/selectableItemBackground"
       android:paddingTop="8dp">
 
-    <ImageView
+    <com.github.snowdream.android.widget.SmartImageView
         android:id="@+id/ImageView_Foto"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -58,15 +58,14 @@
         />
 
     <TextView
-        android:id="@+id/TextView_Precio"
+        android:id="@+id/TextView_SaldoCompra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/EditText_Cantidad"
         android:layout_alignBottom="@+id/EditText_Cantidad"
-        android:layout_toRightOf="@+id/EditText_Cantidad"
         android:layout_toEndOf="@+id/EditText_Cantidad"
-        android:textAppearance="?attr/textAppearanceListItem"
+        android:layout_toRightOf="@+id/EditText_Cantidad"
         android:text="Saldo"
-        />
+        android:textAppearance="?attr/textAppearanceListItem" />
 
 </RelativeLayout>

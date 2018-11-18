@@ -8,15 +8,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".SeleccionRol"
-            android:label="Selección de Rol">
+
+
+        <activity android:name=".InterfazInicial">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".SeleccionRol"
+            android:label="Selección de Rol"/>
         <activity android:name=".IngresoAplicacion" />
         <activity android:name=".ListaCategoriaProducto" />
         <activity
@@ -28,7 +32,12 @@
         </activity>
         <activity android:name=".ListaBeneficiarioDonacion" />
         <activity android:name=".Donacion" />
-        <activity android:name=".ConfirmacionCompra"></activity>
+        <activity android:name=".ConfirmacionCompra" />
+        <activity android:name=".ConfirmacionDonacion" />
+
+        <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
+
+
     </application>
 
 </manifest>

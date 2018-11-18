@@ -1,14 +1,13 @@
 package com.epn.robinsonhuacho.tesis_prototipomediafidelidad_v10;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +46,8 @@ public class ListaProductos extends AppCompatActivity {
         gridViewItemsPrecio = db.getAllProductos(4);
         gridViewItemsImagen = db.getAllProductos(5);
 
+        Toast.makeText(getApplicationContext(),gridViewItemsImagen.toString(), Toast.LENGTH_LONG).show();
+
         final String[] arregloID = gridViewItemsID.toArray(new String[0]);
         String[] arregloProductos = gridViewItemsNombre.toArray(new String[0]);
         String[] arregloDescripcion = gridViewItemsDetalle.toArray(new String[0]);
@@ -66,7 +67,6 @@ public class ListaProductos extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = (String) gridView.getItemAtPosition(position);
                 final ElementoProducto categoriaProducto = db.getProductoNombre(item);
-                Toast.makeText(getApplicationContext(),db.getProductoNombre(item).toString(),Toast.LENGTH_SHORT).show();
 
                 LinearLayout ll = (LinearLayout) view;
                 TextView tv = (TextView) ll.findViewById(R.id.TextView_Nombre);
@@ -78,12 +78,14 @@ public class ListaProductos extends AppCompatActivity {
                 selectedDescription = tv1.getText().toString();
                 selectedPrecio = tv2.getText().toString();
 
-                Intent intent = new Intent(getApplicationContext(), ConfirmacionCompra.class);
 
+                Intent intent = new Intent(getApplicationContext(), ConfirmacionCompra.class);
                 intent.putExtra(Intent.EXTRA_INDEX, selectedId);
                 intent.putExtra(EXTRA_MESSAGE, selectedItem);
                 intent.putExtra(Intent.EXTRA_TITLE, selectedDescription);
                 intent.putExtra(Intent.EXTRA_TEXT, selectedPrecio);
+
+                //Toast.makeText(getApplicationContext(),selectedId+" "+selectedItem+" "+selectedDescription+" "+selectedPrecio, Toast.LENGTH_LONG).show();
 
                 startActivity(intent);
             }

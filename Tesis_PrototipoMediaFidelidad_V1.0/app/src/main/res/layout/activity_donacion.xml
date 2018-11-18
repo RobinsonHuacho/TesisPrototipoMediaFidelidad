@@ -147,22 +147,23 @@
                             android:id="@+id/TextView_UsuarioTarjeta"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/mpsdk_cardholder_name"
+                            android:text="Monto"
                             android:layout_marginBottom="10dp"
                             style="@style/mpsdk_form_label"/>
+
                         <com.mercadopago.customviews.MPEditText
-                            android:id="@+id/EditText_UsuarioTarjeta"
+                            android:id="@+id/EditText_Monto"
+                            style="@style/mpsdk_form_input"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/TextView_UsuarioTarjeta"
-                            android:inputType="textPersonName"
-                            style="@style/mpsdk_form_input"/>
+                            android:inputType="number" />
 
                         <RelativeLayout
                             android:id="@+id/identificationLayout"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_below="@+id/EditText_UsuarioTarjeta">
+                            android:layout_below="@+id/EditText_Monto">
 
                             <com.mercadopago.customviews.MPTextView
                                 android:id="@+id/TextView_TipoIdentificacion"
@@ -215,8 +216,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/mpsdk_button_height"
                 android:layout_margin="@dimen/mpsdk_margin_std"
-                android:text="@string/mpsdk_continue_label"
-                style="@style/mpsdk_button_normal"/>
+                android:onClick="makeRequestInsertarDonacion"
+                android:text="@string/mpsdk_continue_label" />
 
         </LinearLayout>
 

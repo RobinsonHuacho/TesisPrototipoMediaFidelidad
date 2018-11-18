@@ -1,15 +1,16 @@
 package com.epn.robinsonhuacho.tesis_prototipomediafidelidad_v10;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -17,22 +18,35 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SeleccionRol extends AppCompatActivity {
+    private static final int MY_DATA_CHECK_CODE = 1;
+    private DatabaseHandlerCategorias db;
+    private DatabaseHandlerCompras db1;
+    private static SeleccionRol INSTANCE;
+    private String id_rol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccion_rol);
 
-        DatabaseHandlerCategorias db = new DatabaseHandlerCategorias(getApplicationContext());
-        db.deleteCategorias();
+        INSTANCE=this;
 
+        db = new DatabaseHandlerCategorias(getApplicationContext());
+        db.deleteCategorias();
+       db1 = new DatabaseHandlerCompras(getApplicationContext());
+       db1.deleteProductos();
+
+  }
+
+    public void invocarActividadUsuario(View view)
+    {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url2 ="http://192.168.0.6:8080/ProyectoIntegrador/categoriaProducto.php";
-        final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.POST, url2, null, new
-                        Response.Listener<JSONObject>() {
+        String url2 ="http://192.168.0.9:8080/ProyectoIntegrador/categoriaProducto.php";
+        StringRequest jsObjRequest = new StringRequest
+                (Request.Method.GET, url2, new
+                        Response.Listener<String>() {
                             @Override
-                            public void onResponse(JSONObject response) {
+                            public void onResponse(String response) {
 
                                 try {
                                     JSONObject jsonObj = new
@@ -45,8 +59,8 @@ public class SeleccionRol extends AppCompatActivity {
                                         String id = c.getString("ID_CATEGORIA_PRODUCTO");
                                         String nombre_categoria  = c.getString("NOMBRE_CATEGORIA_PRODUCTO");
                                         String imagen_categoria = c.getString("IMAGEN_CATEGORIA");
-                                        DatabaseHandlerCategorias db1 = new DatabaseHandlerCategorias(getApplicationContext());
-                                        db1.addCategoria(new ElementoCategoriaProducto(id, nombre_categoria, imagen_categoria));
+                                       db = new DatabaseHandlerCategorias(getApplicationContext());
+                                        db.addCategoria(new ElementoCategoriaProducto(id, nombre_categoria, imagen_categoria));
                                         //Log.d("Insert","Contacto insertado correctamente");
                                     }
                                 }
@@ -61,19 +75,87 @@ public class SeleccionRol extends AppCompatActivity {
                 });
         queue.add(jsObjRequest);
 
-
-
-    }
-
-    public void invocarActividadUsuario(View view)
-    {
         Intent intent = new Intent(this,IngresoAplicacion.class);
-        startActivity(intent);
+        intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(intent,MY_DATA_CHECK_CODE);
+
+        id_rol="1";
+        Intent intent1 = new Intent("PASO_ID_ROL").putExtra("ID_ROL", id_rol);
+
     }
 
     public void invocarActividadDonador(View view)
     {
+        RequestQueue queue1 = Volley.newRequestQueue(getApplicationContext());
+        String url3 ="http://192.168.0.9:8080/ProyectoIntegrador/compras.php";
+        StringRequest jsObjRequest1 = new StringRequest
+                (Request.Method.GET, url3, new
+                        Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONObject jsonObj1 = new
+                                            JSONObject(response.toString());
+                                    //Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                                    JSONArray contacts = jsonObj1.getJSONArray("compras");
+                                    for (int i = 0; i < contacts.length(); i++) {
+                                        JSONObject c = contacts.getJSONObject(i);
+
+                                        String id_compra = c.getString("ID_COMPRA");
+                                        String id_usuario  = c.getString("ID_USUARIO");
+                                        String fecha_compra = c.getString("FECHA_COMPRA");
+                                        String total_compra = c.getString("TOTAL_COMPRA");
+                                        String saldo_compra = c.getString("SALDO_COMPRA");
+                                        String estado_compra = c.getString("ESTADO_COMPRA");
+                                        String id_rol = c.getString("ID_ROL");
+                                        String foto_usuario = c.getString("FOTO_USUARIO");
+                                        String primer_nombre_usuario = c.getString("PRIMER_NOMBRE_USUARIO");
+                                        String segundo_nombre_usuario = c.getString("SEGUNDO_NOMBRE_USUARIO");
+                                        String primer_apellido_usuario = c.getString("PRIMER_APELLIDO_USUARIO");
+                                        String segundo_apellido_usuario = c.getString("SEGUNDO_APELLIDO_USUARIO");
+                                        String direccion_usuario = c.getString("DIRECCION_USUARIO");
+                                        String telefono_usuario = c.getString("TELEFONO_USUARIO");
+                                        String email_usuario = c.getString("EMAIL_USUARIO");
+                                        String usuario_aplicativo = c.getString("USUARIO_APLICATIVO");
+                                        String password_aplicativo = c.getString("PASSWORD_APLICATIVO");
+                                        String nombres = c.getString("NOMBRES");
+
+                                        //Toast.makeText(getApplicationContext(),nombres,Toast.LENGTH_LONG).show();
+                                        db1 = new DatabaseHandlerCompras(getApplicationContext());
+                                        db1.addCompras(new ElementoCompra(id_compra,id_usuario,fecha_compra,total_compra,saldo_compra,estado_compra,id_rol,foto_usuario,primer_nombre_usuario,segundo_nombre_usuario,primer_apellido_usuario,segundo_apellido_usuario,direccion_usuario,telefono_usuario,email_usuario,usuario_aplicativo,password_aplicativo,nombres));
+                                        //Log.d("Insert","Contacto insertado correctamente");
+                                        db1.deleteProductos();
+                                    }
+                                }
+                                catch (final JSONException e) {
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //mTextView.setText("That didn't work!");
+                    }
+                });
+        queue1.add(jsObjRequest1);
+
+
         Intent intent = new Intent(this,IngresoAplicacion.class);
         startActivity(intent);
+
+        id_rol="2";
+        Intent intent1 = new Intent("PASO_ID_ROL").putExtra("ID_ROL", id_rol);
+
     }
+
+    public static SeleccionRol getActivityInstance() {
+        return INSTANCE;
+    }
+
+    public String getIdRol()
+    {
+        return this.id_rol;
+    }
+
+
 }

@@ -13,7 +13,7 @@ import com.github.snowdream.android.widget.SmartImageView;
 /**
  * Adaptador de leads
  */
-public class ElementosProductosAdaptador extends ArrayAdapter<String> {
+public class ElementosComprasAdaptador extends ArrayAdapter<String> {
 
     private final Activity context;
     private final String[] itemname;
@@ -22,8 +22,8 @@ public class ElementosProductosAdaptador extends ArrayAdapter<String> {
     private final String [] itemPrecios;
     private final String tipoImagen;
 
-    public ElementosProductosAdaptador(Activity context, String[] itemname, String[] itemDescription, String[] itemPrecios, String tipoImagen,String []itemImagenes) {
-        super(context, R.layout.item_producto, itemname);
+    public ElementosComprasAdaptador(Activity context, String[] itemname, String[] itemDescription, String[] itemPrecios, String tipoImagen, String []itemImagenes) {
+        super(context, R.layout.item_lista_beneficiario, itemname);
 
         this.context=context;
         this.itemname=itemname;
@@ -36,12 +36,12 @@ public class ElementosProductosAdaptador extends ArrayAdapter<String> {
     public View getView(int posicion, View view, ViewGroup parent){
 
         LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.item_producto,null,true);
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.TextView_Nombre);
-        TextView txtDescription = (TextView) rowView.findViewById(R.id.TextView_Descripcion);
-        TextView txtPrecio = (TextView) rowView.findViewById(R.id.TextView_Precio);
-
+        View rowView=inflater.inflate(R.layout.item_lista_beneficiario,null,true);
+        TextView txtTitle = (TextView) rowView.findViewById(R.id.TextView_Nombres);
+        TextView txtDescription = (TextView) rowView.findViewById(R.id.TextView_TotalCompra);
+        TextView txtPrecio = (TextView) rowView.findViewById(R.id.TextView_SaldoCompra);
         SmartImageView imageView= (SmartImageView) rowView.findViewById(R.id.ImageView_Foto);
+
         txtTitle.setText(itemname[posicion]);
         txtDescription.setText(itemDescription[posicion]);
         txtPrecio.setText(itemPrecios[posicion]);

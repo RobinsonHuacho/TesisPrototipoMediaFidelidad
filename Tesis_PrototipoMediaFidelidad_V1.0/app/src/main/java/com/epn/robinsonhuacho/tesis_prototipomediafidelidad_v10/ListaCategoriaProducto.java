@@ -1,11 +1,10 @@
 package com.epn.robinsonhuacho.tesis_prototipomediafidelidad_v10;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -13,7 +12,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -46,7 +44,7 @@ public class ListaCategoriaProducto extends AppCompatActivity {
         String []arregloCategorias=GridViewItems.toArray(new String[0]);
         String []arregloImagenes=GridViewImagenes.toArray(new String[0]);
 
-        //Toast.makeText(getApplicationContext(),GridViewItems.toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),db.getAllCategorias(1).toString(),Toast.LENGTH_SHORT).show();
         ElementosCategoriaProductoAdaptador adapter = new ElementosCategoriaProductoAdaptador(this, arregloCategorias, "CategoriaProductos", arregloImagenes);
         final GridView gridViewCategoriaProducto = (GridView) findViewById(R.id.GridView_Categoria_Productos);
 
@@ -58,10 +56,10 @@ public class ListaCategoriaProducto extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = (String) gridViewCategoriaProducto.getItemAtPosition(position);
                 final ElementoCategoriaProducto categoriaProducto = db.getCategoriaNombre(item);
-                Toast.makeText(getApplicationContext(),categoriaProducto.getIdCategoriaProducto(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),categoriaProducto.getIdCategoriaProducto(),Toast.LENGTH_SHORT).show();
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url2 ="http://192.168.0.6:8080/ProyectoIntegrador/producto.php";
+                String url2 ="http://192.168.0.9:8080/ProyectoIntegrador/producto.php";
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
